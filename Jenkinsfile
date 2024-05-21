@@ -13,18 +13,20 @@ pipeline{
         stage('Updating Git with the new build number '){
             steps{
 
-                 script{
-                        withCredentials([usernamePassword(credentialsId: 'GITHUB_CREDENT', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')])
-                        sh "git config user.email temgvan@gmail.com"
-                        sh "git config user.name bcho77"
-                        sh "cat deployment.yml"
-                        sh "sed -i 's+vaninoel/carvilla.*+vaninoel/carvilla:${BUILD_NUMBER}+g'deployment.yml"
-                        sh "cat deployment.yml"
-                        sh "git add ."
-                        sh "git commit -m 'update deployment.yml manifest: ${env.BUILD_NUMBER}'"
-                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/bcho77/Cd_nginxWebapp.git HEAD:main"
-
-                    }             
+                script{
+                    withCredentials([usernamePassword(credentialsId: 'GITHUB_CREDENT', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
+                    sh '''
+                    git config user.email temgvan@gmail.com
+                    git config user.name bcho77
+                    cat deployment.yml
+                    sed -i 's+vaninoel/carvilla.*+vaninoel/carvilla:${BUILD_NUMBER}+g'deployment.yml
+                    cat deployment.yml
+                    git add .
+                    git commit -m 'update deployment.yml manifest: ${env.BUILD_NUMBER}'
+                    git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/bcho77/Cd_nginxWebapp.git HEAD:main
+                    '''
+                    }
+                }             
             }
         }
     }
