@@ -19,11 +19,11 @@ pipeline{
                     git config user.email temgvan@gmail.com
                     git config user.name bcho77
                     cat deployment.yml
-                    sed 's+vaninoel/carvilla.*+vaninoel/carvilla:${BUILD_NUMBER}+g' deployment.yml
+                    sed 's+vaninoel/carvilla.*+vaninoel/carvilla:${BUILD_TAG}+g' deployment.yml
                     cat deployment.yml
                     git add .
                     git commit -m 'update deployment.yml manifest: ${env.BUILD_NUMBER}'
-                    git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/bcho77/Cd_nginxWebapp.git HEAD:main
+                    git push https://github.com/bcho77/Cd_nginxWebapp.git HEAD:main
                     '''
                     }
                 }             
