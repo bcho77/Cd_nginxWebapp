@@ -19,7 +19,7 @@ pipeline{
                     git config user.email temgvan@gmail.com
                     git config user.name bcho77
                     cat deployment.yml
-                    sed -i 's+vaninoel/carvilla:*+vaninoel/carvilla:${BUILD_NUMBER}+g' deployment.yml
+                    sed -i 's+vaninoel/carvilla.*+vaninoel/carvilla:${BUILD_NUMBER}+g' deployment.yml
                     cat deployment.yml
                     git add .
                     git commit -m 'update deployment.yml manifest: ${env.BUILD_NUMBER}'
