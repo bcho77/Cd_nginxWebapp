@@ -23,7 +23,7 @@ pipeline{
                     cat deployment.yml
                     git add .
                     git commit -m 'update deployment.yml manifest: ${env.BUILD_NUMBER}'
-                    git push https://github.com/bcho77/Cd_nginxWebapp.git HEAD:main
+                    git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/bcho77/Cd_nginxWebapp.git HEAD:main
                     '''
                     }
                 }             
