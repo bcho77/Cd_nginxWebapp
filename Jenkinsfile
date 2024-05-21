@@ -5,7 +5,7 @@ pipeline{
         
         stage('check out for scm'){
             steps{
-                git branch 'main'
+                git branch: 'main',
                 url: 'https://github.com/bcho77/Cd_nginxWebapp.git'
 
             }
