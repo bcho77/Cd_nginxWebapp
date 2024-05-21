@@ -14,7 +14,7 @@ pipeline{
             steps{
 
                  script{
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE')
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
                         withCredentials([usernamePassword(credentialsId: 'GITHUB_CREDENT', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')])
                         sh "git config user.email temgvan@gmail.com"
                         sh "git config user.name bcho77"
@@ -25,7 +25,7 @@ pipeline{
                         sh "git commit -m 'update deployment.yml manifest: ${env.BUILD_NUMBER}'"
                         sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/bcho77/Cd_nginxWebapp.git HEAD:main"
 
-                                  }
+                    }             }
             }
         }
     }
