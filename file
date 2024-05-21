@@ -18,6 +18,7 @@ sh '''
                     }
                 }
             }
+             sed -i "s+vaninoel/carvilla:.*+vaninoel/carvilla:${BUILD_NUMBER}+g" deployment.yml
         }
     }
 }
