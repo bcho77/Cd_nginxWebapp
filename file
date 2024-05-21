@@ -1,2 +1,32 @@
 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE')
 
+
+
+
+sh '''
+                        git config user.email temgvan@gmail.com
+                        git config user.name bcho77
+                        sed -i 's+vaninoel/carvilla:.*+vaninoel/carvilla:'"$BUILD_TAG"'+' deployment.yml
+                        git add deployment.yml
+                        if ! git diff-index --quiet HEAD --; then
+                            git commit -m "update deployment.yml manifest: $BUILD_NUMBER"
+                            git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/bcho77/Cd_nginxWebapp.git HEAD:main
+                        else
+                            echo "No changes to commit"
+                        fi
+                        '''
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
