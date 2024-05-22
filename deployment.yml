@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: carvilla
-        image: vaninoel/carvilla:${BUILD_NUMBER}
+        image: vaninoel/carvilla:34
         imagePullPolicy: Always
         ports:
         - containerPort: 8081
